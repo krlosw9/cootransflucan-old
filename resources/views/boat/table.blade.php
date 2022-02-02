@@ -20,12 +20,12 @@
                 <td>{{ $boat->brand_id }}</td>
                 <td>{{ $boat->boat_type_id }}</td>
                 <td>
-                    <button class="btn btn-primary">
+                    <button wire:click="edit({{ $boat->id }})" class="btn btn-primary">
                         Editar
                     </button>
                 </td>
                 <td>
-                    <button class="btn btn-danger">
+                    <button wire:click="destroy({{ $boat->id }})" class="btn btn-danger">
                         Eliminar
                     </button>
                 </td>
