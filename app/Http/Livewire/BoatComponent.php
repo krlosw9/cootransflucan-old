@@ -11,14 +11,25 @@ class BoatComponent extends Component
 {   
     protected $paginationTheme = 'bootstrap';
     use WithPagination;
+    public $search;
     public $view = 'create';
     public $boat_id, $name, $enrollment, $brand_id, $boat_type_id, $shell, $power;
     public $property_number, $line, $rpm, $serial_number, $helix, $paw, $active;
     
     public function render()
     {
+        if(strlen($this->search) > 0)
+        {
+            $boats = Boat::where('name', 'like', "%{$this->search}%")
+            ->orderBy('id', 'desc')->paginate(14);
+        }else
+        {
+            $boats = Boat::orderBy('id', 'desc')->paginate(14);
+        }
+        
+
         return view('livewire.boat-component', [
-            'boats' => Boat::orderBy('id', 'desc')->paginate(14)
+            'boats' => $boats
         ]);
     }
 
